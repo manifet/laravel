@@ -107,7 +107,7 @@ class ArticleController extends Controller
         $article->text=$request->text;
         $article->user_id=auth()->id();
         $article->save();
-        return redirect()->route("article.show",['article'=>$article->id])->with('status','Update otvechayu, ne ssi');
+        return redirect()->route("article.show",['article'=>$article->id])->with('status','Updated');
     }
 
     /**

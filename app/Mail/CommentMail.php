@@ -30,7 +30,7 @@ class CommentMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address("royny3.0@mail.ru", env("MAIL_FROM_NAME")),
+            from: new Address("manifetko@yandex.ru", env("MAIL_FROM_NAME")),
             subject: 'Comment Mail',
         );
     }
@@ -45,7 +45,7 @@ class CommentMail extends Mailable
             with:[
                 'comment'=>$this->comment,
                 'article'=>$this->article,
-                'url'=>'http://127.0.0.1:3000/article/'.$this->article->id,
+                'url'=>'http://127.0.0.1:8000/article/'.$this->article->id,
             ]
         );
     }

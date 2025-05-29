@@ -30,10 +30,10 @@ class ArticleControllerPolicy
      */
     public function create(User $user)
     {
-        Log::alert('hhhhh');
+        Log::alert('stop');
         return $user->role == 'moderator'?
          Response::allow()
-        :Response::deny("ti loh, a ne moderator");
+        :Response::deny("ne moderator");
     }
 
     /**
@@ -41,10 +41,10 @@ class ArticleControllerPolicy
      */
     public function update(User $user, Article $article)
     {
-        Log::alert('hhhhh');
+        Log::alert('stop');
         return $user->role == 'moderator'?
          Response::allow()
-        :Response::deny("ti loh, a ne moderator");
+        :Response::deny("ne moderator");
     }
 
     /**
@@ -52,10 +52,10 @@ class ArticleControllerPolicy
      */
     public function delete(User $user, Article $article)
     {
-        Log::alert('hhhhh');
+        Log::alert('stop');
         return $user->role == 'moderator'?
          Response::allow()
-        :Response::deny("ti loh, a ne moderator");
+        :Response::deny("ne moderator");
     }
 
     /**

@@ -29,7 +29,7 @@ class StatMail extends Mailable
     {
 
         return new Envelope(
-            from: new Address("royny3.0@mail.ru", env("MAIL_FROM_NAME")),
+            from: new Address("manifetko@yandex.ru", env("MAIL_FROM_NAME")),
 
             subject: 'Stat Mail',
         );
