@@ -32,8 +32,14 @@ return [
     |            "postmark", "log", "array", "failover", "roundrobin"
     |
     */
-
+'stream' => [
+    'ssl' => [
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+    ],
+],
     'mailers' => [
+        
         'smtp' => [
             'transport' => 'smtp',
             'url' => env('MAIL_URL'),
