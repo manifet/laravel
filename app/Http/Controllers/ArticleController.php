@@ -42,23 +42,36 @@ class ArticleController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $keys = DB::table('cache')->whereRaw('`key` GLOB :key',[':key'=>'article_*[0-9]'])->get();
-        foreach($keys as $key){
-            Cache::forget($key->key);
-        }
-        $request->validate([ 
-            'date_print'=>'required|date',
-            'title'=>'required',
-            'text'=>'required']);
-        $article = new Article;
-        $article->date_print=$request->date_print;
-        $article->title=$request->title;
-        $article->text=$request->text;
-        $article->user_id=auth()->id();
-        if($article->save()) ArticleCreateEvent::dispatch($article);
-        return redirect()->route("article.index");
+{
+    Gate::authorize('create', [self::class]);
+
+    // Очистка кэша по шаблону (для MySQL/MariaDB)
+    $keys = DB::table('cache')
+        ->where('key', 'REGEXP', '^article_.*[0-9]$')
+        ->get();
+
+    foreach ($keys as $key) {
+        Cache::forget($key->key);
     }
+
+    $request->validate([
+        'date_print' => 'required|date',
+        'title' => 'required',
+        'text' => 'required'
+    ]);
+
+    $article = new Article;
+    $article->date_print = $request->date_print;
+    $article->title = $request->title;
+    $article->text = $request->text;
+    $article->user_id = auth()->id();
+
+    if ($article->save()) {
+        ArticleCreateEvent::dispatch($article);
+    }
+
+    return redirect()->route("article.index");
+}
     /**
      * Display the specified resource.
      */
