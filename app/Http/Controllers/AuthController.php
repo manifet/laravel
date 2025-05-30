@@ -30,7 +30,6 @@ class AuthController extends Controller
             'password'=>Hash::make(request('password'))
         ]);
         
-        // $user->remember_token=$user->createToken('MyAppToken')->plainTextToken;
         $user->save();
         return redirect('/');
     }

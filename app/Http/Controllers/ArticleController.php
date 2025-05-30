@@ -45,7 +45,7 @@ class ArticleController extends Controller
 {
     Gate::authorize('create', [self::class]);
 
-    // Очистка кэша по шаблону (для MySQL/MariaDB)
+    // Очистка кэша по шаблону (для MySQL)
     $keys = DB::table('cache')
         ->where('key', 'REGEXP', '^article_.*[0-9]$')
         ->get();
@@ -117,6 +117,6 @@ class ArticleController extends Controller
     {
         Gate::authorize('delete',[self::class,$article]);
         $article->delete();
-        return redirect()->route('article.index')->with('status','Delete otvechayu, ne ssi');
+        return redirect()->route('article.index')->with('status','Deleted');
     }
 }
